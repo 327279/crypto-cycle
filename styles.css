@@ -1048,6 +1048,16 @@ footer a {
     gap: 10px;
   }
 
+  .svg-container {
+    overflow-x: hidden;
+  }
+
+  svg#cycleChart {
+    min-width: 0;
+    width: 100%;
+    height: auto;
+  }
+
   .control-bar {
     flex-direction: column;
     align-items: stretch;
@@ -1144,23 +1154,80 @@ footer a {
 
   .chart-wrapper {
     border-radius: var(--radius-md);
+    overflow: hidden;
   }
 
   .chart-header {
     padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .chart-title {
+    font-size: 16px;
   }
 
   .chart-legend {
+    display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px 12px;
   }
 
   .legend-item {
     font-size: 10.5px;
+    gap: 4px;
   }
 
+  .legend-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Full responsive mobile chart - fits screen perfectly with zero horizontal scroll */
   .svg-container {
-    padding: 6px 6px 10px;
+    padding: 4px 4px 10px;
+    overflow-x: hidden !important;
+    width: 100%;
+  }
+
+  svg#cycleChart {
+    min-width: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Make curve lines punchy and legible on mobile displays */
+  .curve-seg {
+    stroke-width: 3.5px !important;
+  }
+
+  .curve-glow {
+    stroke-width: 8px !important;
+    opacity: 0.45 !important;
+  }
+
+  .ref-line {
+    stroke-width: 1.5px !important;
+  }
+
+  /* Scale SVG typography for readability without overlapping */
+  .axis-label {
+    font-size: 11.5px !important;
+    font-weight: 600;
+  }
+
+  .ann-title {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Hide the tiny redundant subtitle lines on mobile so titles don't collide */
+  .ann-sub {
+    display: none !important;
+  }
+
+  /* Make circles on points easy to distinguish */
+  .annotation circle:not(.pulse-circle) {
+    r: 5.5 !important;
   }
 
   .control-bar {
@@ -1174,12 +1241,18 @@ footer a {
   }
 
   .stepper-nav {
-    gap: 4px;
+    gap: 3px;
+    padding: 4px 0 6px;
   }
 
   .step-pill {
-    min-width: 50px;
-    padding: 6px 4px;
+    min-width: 0 !important;
+    flex: 1;
+    padding: 6px 2px;
+  }
+
+  .step-num {
+    font-size: 9.5px;
   }
 
   .step-name {
