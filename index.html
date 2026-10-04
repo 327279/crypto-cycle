@@ -4,44 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>The Crypto Market Cycle: How Retail Becomes Exit Liquidity</title>
-  <meta name="description" content="An interactive visual masterclass on the crypto market cycle, psychological traps, and how to avoid becoming exit liquidity.">
+  <meta name="description" content="An interactive visual guide on the crypto market cycle, psychological traps, and how to avoid becoming exit liquidity.">
   
-  <!-- OpenGraph / Social Media -->
+  <!-- OpenGraph / Twitter Card -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="The Crypto Cycle: How Retail Becomes Exit Liquidity">
-  <meta property="og:description" content="Watch who gets in, who gets out, and who gets left holding the bag. Interactive market curve & survival rules.">
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="The Crypto Cycle: How Retail Becomes Exit Liquidity">
-  <meta property="twitter:description" content="Watch who gets in, who gets out, and who gets left holding the bag.">
+  <meta property="og:url" content="https://327279.github.io/crypto-cycle/">
+  <meta property="og:title" content="The Crypto Market Cycle: How Retail Becomes Exit Liquidity">
+  <meta property="og:description" content="Watch who gets in, who gets out, and who gets left holding the bag. The 10 psychological stages of every market cycle.">
+  <meta property="og:image" content="https://327279.github.io/crypto-cycle/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Crypto Market Cycle: How Retail Becomes Exit Liquidity">
+  <meta name="twitter:description" content="Watch who gets in, who gets out, and who gets left holding the bag. The 10 psychological stages of every market cycle.">
+  <meta name="twitter:image" content="https://327279.github.io/crypto-cycle/og-image.png">
+
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📉</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2310b981'/></svg>">
 </head>
 <body>
 
   <!-- Top Navigation Bar -->
   <header class="top-nav">
     <a href="#" class="brand">
-      <div class="brand-icon">⚡</div>
+      <div class="brand-symbol">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+          <polyline points="16 7 22 7 22 13"></polyline>
+        </svg>
+      </div>
       <div class="brand-title">
-        CryptoCycle
-        <span class="badge-live">Live Simulator</span>
+        Crypto Cycle
+        <span class="badge-live">Simulator</span>
       </div>
     </a>
 
     <div class="nav-actions">
-      <button class="icon-btn" id="soundBtn" title="Toggle Sound Effects" onclick="toggleSound()">
-        <span id="soundIcon">🔇</span> <span id="soundLabel">Sound Off</span>
+      <button class="nav-btn" id="soundBtn" title="Toggle Audio" onclick="toggleSound()">
+        <span id="soundLabel">Sound Off</span>
       </button>
-      <button class="icon-btn" id="themeBtn" title="Toggle Light/Dark Theme" onclick="toggleTheme()">
-        <span id="themeIcon">☀️</span>
+      <button class="nav-btn" id="themeBtn" title="Toggle Light/Dark Theme" onclick="toggleTheme()">
+        <span id="themeLabel">Light</span>
       </button>
-      <a href="#lessons" class="icon-btn" style="text-decoration: none;">
-        <span>🛡️ Survival Rules</span>
+      <a href="#lessons" class="nav-btn">
+        <span>Rules</span>
       </a>
-      <button class="icon-btn" onclick="shareToTwitter()" title="Share to X">
-        <span>𝕏 Share</span>
-      </button>
+      <a href="#xCardSection" class="nav-btn" style="border-color: var(--card-border-glow);">
+        <span>Post to X</span>
+      </a>
     </div>
   </header>
 
@@ -51,16 +62,16 @@
     <!-- Hero Header -->
     <header class="hero">
       <div class="hero-pill">
-        <span>🔄 Interactive Market Psychology Guide</span>
+        <span>Market Psychology Guide</span>
       </div>
       <h1 class="hero-title">The Crypto Market Cycle</h1>
       <p class="hero-subtitle">
-        How retail becomes exit liquidity: Watch who accumulates early, who hypes the top, and who gets left holding the bag.
+        How retail becomes exit liquidity. Watch who accumulates early, who hypes the top, and who gets left holding the bag.
       </p>
       <div class="hero-tip">
         <span>Controls:</span>
-        <span class="kbd">Space</span> Play/Pause &nbsp;•&nbsp; 
-        <span class="kbd">←</span> <span class="kbd">→</span> Prev/Next &nbsp;•&nbsp; 
+        <span class="kbd">Space</span> Play/Pause &nbsp;|&nbsp; 
+        <span class="kbd">←</span> <span class="kbd">→</span> Step &nbsp;|&nbsp; 
         <span class="kbd">R</span> Reset
       </div>
     </header>
@@ -91,16 +102,16 @@
           <span class="hud-tag tag-orange" id="hudPnlTag">Unopened</span>
         </div>
         <div class="hud-value" id="hudPortfolioVal">$0</div>
-        <div class="hud-sub" id="hudPortfolioSub">Waiting for KOL call</div>
+        <div class="hud-sub" id="hudPortfolioSub">Waiting on sidelines</div>
       </div>
 
       <div class="hud-card" style="--hud-color: var(--kols);">
         <div class="hud-label">
-          <span>Retail Psychology</span>
-          <span class="hud-tag tag-purple" id="hudSentimentTag">Unaware</span>
+          <span>Retail Sentiment</span>
+          <span class="hud-tag tag-purple" id="hudSentimentTag">Phase 1</span>
         </div>
         <div class="hud-value" id="hudSentimentText">Boredom</div>
-        <div class="hud-sub" id="hudSentimentSub">Zero hype on timeline</div>
+        <div class="hud-sub" id="hudSentimentSub">Zero timeline activity</div>
       </div>
     </section>
 
@@ -115,69 +126,27 @@
 
         <div class="chart-legend">
           <div class="legend-item">
-            <span class="legend-dot" style="background: var(--smart-money); box-shadow: 0 0 8px var(--smart-money);"></span>
+            <span class="legend-dot" style="background: var(--smart-money);"></span>
             <span>Smart Money</span>
           </div>
           <div class="legend-item">
-            <span class="legend-dot" style="background: var(--kols); box-shadow: 0 0 8px var(--kols);"></span>
-            <span>KOLs / Influencers</span>
+            <span class="legend-dot" style="background: var(--kols);"></span>
+            <span>KOLs / Shilling</span>
           </div>
           <div class="legend-item">
-            <span class="legend-dot" style="background: var(--retail); box-shadow: 0 0 8px var(--retail);"></span>
+            <span class="legend-dot" style="background: var(--retail);"></span>
             <span>You (Retail)</span>
           </div>
           <div class="legend-item">
-            <span style="display:inline-block; width:14px; border-top:1px dashed var(--retail); margin-right:2px;"></span>
+            <span style="display:inline-block; width:12px; border-top:1px dashed var(--retail); margin-right:2px;"></span>
             <span>Your Entry / Break-even</span>
           </div>
         </div>
       </div>
 
       <div class="svg-container">
-        <svg id="cycleChart" viewBox="0 0 720 460" role="img" aria-label="Interactive crypto market cycle curve from stage 1 to 10">
+        <svg id="cycleChart" viewBox="0 0 940 480" role="img" aria-label="Interactive crypto market cycle curve">
           <defs>
-            <!-- Laser Glow Filters -->
-            <filter id="laserGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="3.5" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-            
-            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-
-            <!-- Gradient Area Fills -->
-            <linearGradient id="bullAreaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#10b981" stop-opacity="0.25"/>
-              <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
-            </linearGradient>
-
-            <linearGradient id="bearAreaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#ef4444" stop-opacity="0.22"/>
-              <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0"/>
-            </linearGradient>
-
-            <linearGradient id="moonAreaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.32"/>
-              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.0"/>
-            </linearGradient>
-
-            <!-- Line Gradients -->
-            <linearGradient id="gradBull" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#10b981"/>
-              <stop offset="100%" stop-color="#34d399"/>
-            </linearGradient>
-            <linearGradient id="gradDump" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f87171"/>
-              <stop offset="100%" stop-color="#ef4444"/>
-            </linearGradient>
             <linearGradient id="gradMoon" x1="0%" y1="100%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#10b981"/>
               <stop offset="60%" stop-color="#fbbf24"/>
@@ -187,189 +156,180 @@
 
           <!-- Grid Background Lines -->
           <g class="grid-lines" opacity="0.8">
-            <line x1="60" y1="75" x2="685" y2="75" class="axis-grid"/>
-            <line x1="60" y1="130" x2="685" y2="130" class="axis-grid"/>
-            <line x1="60" y1="195" x2="685" y2="195" class="axis-grid"/>
-            <line x1="60" y1="275" x2="685" y2="275" class="axis-grid"/>
-            <line x1="60" y1="345" x2="685" y2="345" class="axis-grid"/>
+            <line x1="65" y1="65" x2="895" y2="65" class="axis-grid"/>
+            <line x1="65" y1="150" x2="895" y2="150" class="axis-grid"/>
+            <line x1="65" y1="210" x2="895" y2="210" class="axis-grid"/>
+            <line x1="65" y1="285" x2="895" y2="285" class="axis-grid"/>
+            <line x1="65" y1="365" x2="895" y2="365" class="axis-grid"/>
 
-            <!-- Vertical grid marks -->
-            <line x1="130" y1="30" x2="130" y2="395" class="axis-grid"/>
-            <line x1="285" y1="30" x2="285" y2="395" class="axis-grid"/>
-            <line x1="418" y1="30" x2="418" y2="395" class="axis-grid"/>
-            <line x1="535" y1="30" x2="535" y2="395" class="axis-grid"/>
-            <line x1="610" y1="30" x2="610" y2="395" class="axis-grid"/>
+            <line x1="160" y1="35" x2="160" y2="415" class="axis-grid"/>
+            <line x1="340" y1="35" x2="340" y2="415" class="axis-grid"/>
+            <line x1="515" y1="35" x2="515" y2="415" class="axis-grid"/>
+            <line x1="660" y1="35" x2="660" y2="415" class="axis-grid"/>
+            <line x1="815" y1="35" x2="815" y2="415" class="axis-grid"/>
           </g>
 
           <!-- Axes -->
-          <line x1="60" y1="30" x2="60" y2="395" class="axis-line"/>
-          <line x1="60" y1="395" x2="685" y2="395" class="axis-line"/>
+          <line x1="65" y1="35" x2="65" y2="415" class="axis-line"/>
+          <line x1="65" y1="415" x2="895" y2="415" class="axis-line"/>
 
           <!-- Axis Labels -->
-          <text class="axis-label" x="60" y="24" text-anchor="start">PRICE (USD)</text>
-          <text class="axis-label" x="50" y="80" text-anchor="end">$145</text>
-          <text class="axis-label" x="50" y="134" text-anchor="end" fill="var(--retail)">$100</text>
-          <text class="axis-label" x="50" y="200" text-anchor="end">$60</text>
-          <text class="axis-label" x="50" y="280" text-anchor="end">$30</text>
-          <text class="axis-label" x="50" y="348" text-anchor="end">$10</text>
+          <text class="axis-label" x="65" y="24" text-anchor="start">PRICE (USD)</text>
+          <text class="axis-label" x="55" y="70" text-anchor="end">$145</text>
+          <text class="axis-label" x="55" y="154" text-anchor="end" fill="var(--retail)">$100</text>
+          <text class="axis-label" x="55" y="215" text-anchor="end">$60</text>
+          <text class="axis-label" x="55" y="290" text-anchor="end">$30</text>
+          <text class="axis-label" x="55" y="370" text-anchor="end">$10</text>
 
-          <text class="axis-label" x="685" y="415" text-anchor="end">TIME / PSYCHOLOGY →</text>
-          <text class="axis-label" x="95" y="415" text-anchor="middle">Accumulation</text>
-          <text class="axis-label" x="285" y="415" text-anchor="middle">Markup</text>
-          <text class="axis-label" x="418" y="415" text-anchor="middle">Distribution</text>
-          <text class="axis-label" x="515" y="415" text-anchor="middle">Despair</text>
-          <text class="axis-label" x="610" y="415" text-anchor="middle">Rebirth</text>
+          <text class="axis-label" x="895" y="438" text-anchor="end">TIME / PSYCHOLOGY</text>
+          <text class="axis-label" x="110" y="438" text-anchor="middle">Accumulation</text>
+          <text class="axis-label" x="340" y="438" text-anchor="middle">Markup</text>
+          <text class="axis-label" x="515" y="438" text-anchor="middle">Distribution</text>
+          <text class="axis-label" x="660" y="438" text-anchor="middle">Capitulation</text>
+          <text class="axis-label" x="815" y="438" text-anchor="middle">Rebirth</text>
 
-          <!-- Break-Even Constant Reference Line at Y=130 (Revealed at Stage 3) -->
-          <g id="breakEvenLineGroup" opacity="0" style="transition: opacity 0.6s ease;">
-            <line x1="60" y1="130" x2="685" y2="130" stroke="var(--retail)" stroke-width="1.2" stroke-dasharray="4 4" class="ref-line"/>
-            <rect x="520" y="112" width="160" height="20" rx="4" fill="var(--chart-bg)" stroke="var(--retail)" stroke-width="1"/>
-            <text class="ann-tag" x="600" y="126" fill="var(--retail)">⚡ YOUR ENTRY / BREAK-EVEN ($100)</text>
+          <!-- Break-Even Constant Reference Line at Y=150 -->
+          <g id="breakEvenLineGroup" opacity="0" style="transition: opacity 0.5s ease;">
+            <line x1="65" y1="150" x2="895" y2="150" stroke="var(--retail)" stroke-width="1.2" stroke-dasharray="4 4" class="ref-line"/>
+            <rect x="740" y="136" width="155" height="18" rx="3" fill="var(--chart-bg)" stroke="var(--retail)" stroke-width="1" opacity="0.9"/>
+            <text class="axis-label" x="817" y="149" text-anchor="middle" fill="var(--retail)" font-weight="600" font-size="10">YOUR ENTRY ($100)</text>
           </g>
 
           <!-- =================== 10 CURVE STAGES =================== -->
 
           <!-- Stage 1: Smart money accumulates -->
           <g id="g1">
-            <path class="curve-glow" d="M60,342 C85,344 105,340 130,335" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M60,342 C85,344 105,340 130,335" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M65,360 C95,360 125,358 160,355" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M65,360 C95,360 125,358 160,355" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <line class="ref-line" x1="95" y1="341" x2="95" y2="368" stroke="var(--smart-money)"/>
-              <circle cx="95" cy="341" r="5" fill="var(--smart-money)"/>
-              <circle cx="95" cy="341" r="9" fill="none" stroke="var(--smart-money)" opacity="0.4"/>
-              <text class="ann-title" x="95" y="382" text-anchor="middle">Smart money accumulates</text>
-              <text class="ann-sub" x="95" y="396" text-anchor="middle">Quiet, low volatility buying</text>
+              <circle cx="112" cy="358" r="4.5" fill="var(--smart-money)"/>
+              <text class="ann-title" x="112" y="384" text-anchor="middle">Smart money accumulates</text>
+              <text class="ann-sub" x="112" y="398" text-anchor="middle">Quiet baseline accumulation</text>
             </g>
           </g>
 
           <!-- Stage 2: Breakout, early longs -->
           <g id="g2">
-            <path class="curve-glow" d="M130,335 C155,328 180,305 210,275" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M130,335 C155,328 180,305 210,275" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M160,355 C190,350 220,320 250,285" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M160,355 C190,350 220,320 250,285" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <circle cx="210" cy="275" r="5" fill="var(--smart-money)"/>
-              <text class="ann-title" x="200" y="260" text-anchor="end">Breakout &amp; early longs</text>
-              <text class="ann-sub" x="200" y="274" text-anchor="end">Traders notice, crowd unaware</text>
+              <circle cx="250" cy="285" r="4.5" fill="var(--smart-money)"/>
+              <text class="ann-title" x="238" y="272" text-anchor="end">Breakout, early longs</text>
+              <text class="ann-sub" x="238" y="286" text-anchor="end">Traders notice trend</text>
             </g>
           </g>
 
           <!-- Stage 3: KOLs start shilling & You buy in -->
           <g id="g3">
-            <path class="curve-glow" d="M210,275 C235,248 260,195 285,130" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M210,275 C235,248 260,195 285,130" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M250,285 C280,250 310,195 340,150" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M250,285 C280,250 310,195 340,150" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <!-- KOL Shilling point -->
-              <circle cx="245" cy="215" r="5" fill="var(--kols)"/>
-              <circle cx="245" cy="215" r="10" fill="none" stroke="var(--kols)" opacity="0.4"/>
-              <text class="ann-title" x="235" y="205" text-anchor="end" fill="var(--kols)">📢 KOLs start shilling</text>
-              <text class="ann-sub" x="235" y="220" text-anchor="end">"Next 100x gem thread 🧵"</text>
+              <!-- KOLs Callout -->
+              <circle cx="295" cy="225" r="4.5" fill="var(--kols)"/>
+              <text class="ann-title" x="282" y="218" text-anchor="end" fill="var(--kols)">KOLs start shilling</text>
+              <text class="ann-sub" x="282" y="232" text-anchor="end">Target threads posted</text>
 
-              <!-- You buy in point -->
-              <circle cx="285" cy="130" r="7" fill="var(--retail)"/>
-              <circle cx="285" cy="130" r="13" fill="none" stroke="var(--retail)" stroke-width="1.5" class="pulse-circle"/>
-              <text class="ann-title" x="285" y="105" text-anchor="middle" fill="var(--retail)">🎯 YOU BUY IN</text>
-              <text class="ann-sub" x="285" y="120" text-anchor="middle">Entry Price: $100.00</text>
+              <!-- You buy in Callout -->
+              <circle cx="340" cy="150" r="5.5" fill="var(--retail)"/>
+              <circle cx="340" cy="150" r="11" fill="none" stroke="var(--retail)" stroke-width="1.2" class="pulse-circle"/>
+              <text class="ann-title" x="328" y="136" text-anchor="end" fill="var(--retail)">You buy in</text>
+              <text class="ann-sub" x="328" y="150" text-anchor="end">Entry price: $100.00</text>
             </g>
           </g>
 
           <!-- Stage 4: Retail FOMO at the top -->
           <g id="g4">
-            <path class="curve-glow" d="M285,130 C300,95 312,78 325,75" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M285,130 C300,95 312,78 325,75" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M340,150 C365,100 390,65 415,60" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M340,150 C365,100 390,65 415,60" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <circle cx="325" cy="75" r="6" fill="var(--smart-money)"/>
-              <circle cx="325" cy="75" r="12" fill="none" stroke="var(--smart-money)" opacity="0.5"/>
-              <text class="ann-title" x="315" y="52" text-anchor="end">Smart money exits 💰</text>
-              <text class="ann-title" x="338" y="52" text-anchor="start" fill="var(--retail)">Retail FOMOs in at top</text>
-              <text class="ann-sub" x="338" y="67" text-anchor="start">"100x mindset / Euphoria"</text>
+              <circle cx="415" cy="60" r="5" fill="var(--smart-money)"/>
+              <text class="ann-title" x="398" y="44" text-anchor="end">Smart money exits</text>
+              <text class="ann-sub" x="398" y="58" text-anchor="end">Selling into liquidity</text>
+
+              <text class="ann-title" x="432" y="44" text-anchor="start" fill="var(--retail)">Retail FOMOs at top</text>
+              <text class="ann-sub" x="432" y="58" text-anchor="start">100x mindset / Euphoria</text>
             </g>
           </g>
 
           <!-- Stage 5: "Just a healthy retracement" -->
           <g id="g5">
-            <path class="curve-glow" d="M325,75 C340,76 352,105 365,135 C372,158 378,185 385,195" stroke="var(--dump)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M325,75 C340,76 352,105 365,135 C372,158 378,185 385,195" stroke="var(--dump)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M415,60 C435,62 455,95 475,140 C490,175 500,210 515,225" stroke="var(--dump)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M415,60 C435,62 455,95 475,140 C490,175 500,210 515,225" stroke="var(--dump)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <line class="ref-line" x1="365" y1="140" x2="415" y2="105" stroke="var(--dump)"/>
-              <circle cx="365" cy="140" r="4" fill="var(--dump)"/>
-              <text class="ann-title" x="420" y="102" text-anchor="start" fill="var(--dump)">"Just a healthy retracement"</text>
-              <text class="ann-sub" x="420" y="117" text-anchor="start">KOLs reassure: "Buy the dip!"</text>
+              <circle cx="485" cy="165" r="4" fill="var(--dump)"/>
+              <line class="ref-line" x1="485" y1="165" x2="520" y2="140" stroke="var(--dump)"/>
+              <text class="ann-title" x="525" y="136" text-anchor="start" fill="var(--dump)">"Just a healthy retracement"</text>
+              <text class="ann-sub" x="525" y="150" text-anchor="start">KOLs reassure: "Buy the dip"</text>
             </g>
           </g>
 
           <!-- Stage 6: Dead cat bounce -->
           <g id="g6">
-            <path class="curve-glow" d="M385,195 C394,190 405,155 418,145" stroke="var(--dump)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M385,195 C394,190 405,155 418,145" stroke="var(--dump)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M515,225 C530,220 545,185 565,175" stroke="var(--dump)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M515,225 C530,220 545,185 565,175" stroke="var(--dump)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <circle cx="418" cy="145" r="5" fill="var(--text-muted)"/>
-              <text class="ann-title" x="428" y="148" text-anchor="start">🐱 Dead cat bounce</text>
-              <text class="ann-sub" x="428" y="163" text-anchor="start">Last chance to exit. You hold.</text>
+              <circle cx="565" cy="175" r="4" fill="var(--text-muted)"/>
+              <text class="ann-title" x="578" y="172" text-anchor="start">Dead cat bounce</text>
+              <text class="ann-sub" x="578" y="186" text-anchor="start">Last exit chance. You hold.</text>
             </g>
           </g>
 
           <!-- Stage 7: Down 90% (The slow bleed) -->
           <g id="g7">
-            <path class="curve-glow" d="M418,145 C432,152 445,265 470,332 C478,344 486,348 495,348" stroke="var(--dump)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M418,145 C432,152 445,265 470,332 C478,344 486,348 495,348" stroke="var(--dump)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M565,175 C585,182 605,290 630,355 C640,365 650,368 660,368" stroke="var(--dump)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M565,175 C585,182 605,290 630,355 C640,365 650,368 660,368" stroke="var(--dump)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <line class="ref-line" x1="472" y1="334" x2="472" y2="365" stroke="var(--retail)"/>
-              <circle cx="472" cy="334" r="6" fill="var(--retail)"/>
-              <circle cx="472" cy="334" r="11" fill="none" stroke="var(--retail)" opacity="0.4"/>
-              <text class="ann-title" x="472" y="380" text-anchor="middle" fill="var(--retail)">You hold, down 90% 🩸</text>
-              <text class="ann-sub" x="472" y="394" text-anchor="middle">Agonizing capitulation &amp; silence</text>
+              <circle cx="630" cy="355" r="5" fill="var(--retail)"/>
+              <text class="ann-title" x="618" y="336" text-anchor="end" fill="var(--retail)">You hold, down 90%</text>
+              <text class="ann-sub" x="618" y="350" text-anchor="end">Capitulation &amp; silence</text>
             </g>
           </g>
 
           <!-- Stage 8: Smart money buys again -->
           <g id="g8">
-            <path class="curve-glow" d="M495,348 C510,348 522,348 535,348" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M495,348 C510,348 522,348 535,348" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M660,368 C680,368 700,368 720,368" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M660,368 C680,368 700,368 720,368" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <circle cx="515" cy="348" r="6" fill="var(--smart-money)"/>
-              <circle cx="515" cy="348" r="14" fill="none" stroke="var(--smart-money)" stroke-width="1.5" class="pulse-circle"/>
-              <circle cx="515" cy="348" r="24" fill="none" stroke="var(--smart-money)" stroke-width="1" class="pulse-circle" style="animation-delay: 0.5s;"/>
-              <line class="ref-line" x1="515" y1="348" x2="515" y2="368" stroke="var(--smart-money)"/>
-              <text class="ann-title" x="515" y="382" text-anchor="middle" fill="var(--smart-money)">Smart money buys again 🐋</text>
-              <text class="ann-sub" x="515" y="396" text-anchor="middle">Quiet accumulation at rock bottom</text>
+              <circle cx="700" cy="368" r="5" fill="var(--smart-money)"/>
+              <circle cx="700" cy="368" r="12" fill="none" stroke="var(--smart-money)" stroke-width="1.2" class="pulse-circle"/>
+              <text class="ann-title" x="726" y="365" text-anchor="start" fill="var(--smart-money)">Smart money buys again</text>
+              <text class="ann-sub" x="726" y="379" text-anchor="start">Accumulating the next cycle</text>
             </g>
           </g>
 
           <!-- Stage 9: Fundamentals bring it back -->
           <g id="g9">
-            <path class="curve-glow" d="M535,348 C560,348 580,285 595,195 C602,158 606,140 610,130" stroke="var(--smart-money)" stroke-width="7" fill="none"/>
-            <path class="curve-seg" d="M535,348 C560,348 580,285 595,195 C602,158 606,140 610,130" stroke="var(--smart-money)" stroke-width="3" fill="none"/>
+            <path class="curve-glow" d="M720,368 C750,368 775,300 795,210 C805,175 810,160 815,150" stroke="var(--smart-money)" stroke-width="6" fill="none"/>
+            <path class="curve-seg" d="M720,368 C750,368 775,300 795,210 C805,175 810,160 815,150" stroke="var(--smart-money)" stroke-width="2.6" fill="none"/>
             <g class="annotation">
-              <circle cx="575" cy="270" r="4" fill="var(--smart-money)"/>
-              <text class="ann-title" x="565" y="240" text-anchor="end" fill="var(--smart-money)">Fundamentals bring it back 🛠️</text>
-              <text class="ann-sub" x="565" y="255" text-anchor="end">Organic revenue &amp; real adoption</text>
+              <circle cx="775" cy="270" r="4" fill="var(--smart-money)"/>
+              <text class="ann-title" x="765" y="258" text-anchor="end" fill="var(--smart-money)">Fundamentals bring it back</text>
+              <text class="ann-sub" x="765" y="272" text-anchor="end">Organic revenue &amp; adoption</text>
             </g>
           </g>
 
           <!-- Stage 10: You sell at break-even, then it pumps without you! -->
           <g id="g10">
-            <path class="curve-glow" d="M610,130 C625,100 642,65 658,40 C668,26 678,18 685,15" stroke="var(--moonshot)" stroke-width="8" fill="none"/>
-            <path class="curve-seg" d="M610,130 C625,100 642,65 658,40 C668,26 678,18 685,15" stroke="url(#gradMoon)" stroke-width="3.5" fill="none"/>
+            <path class="curve-glow" d="M815,150 C835,110 855,65 875,35 C885,22 892,15 898,12" stroke="var(--moonshot)" stroke-width="7" fill="none"/>
+            <path class="curve-seg" d="M815,150 C835,110 855,65 875,35 C885,22 892,15 898,12" stroke="url(#gradMoon)" stroke-width="3" fill="none"/>
             <g class="annotation">
-              <!-- Exit point at Y=130 -->
-              <circle cx="610" cy="130" r="7" fill="var(--retail)"/>
-              <circle cx="610" cy="130" r="14" fill="none" stroke="var(--retail)" stroke-width="1.5" class="pulse-circle"/>
-              <line class="ref-line" x1="610" y1="137" x2="610" y2="280" stroke="var(--retail)"/>
-              <rect x="530" y="280" width="160" height="48" rx="6" fill="var(--chart-bg)" stroke="var(--retail)" stroke-width="1.2"/>
-              <text class="ann-title" x="610" y="298" text-anchor="middle" fill="var(--retail)">You sell at break-even 💸</text>
-              <text class="ann-sub" x="610" y="315" text-anchor="middle">"I just want my money back!"</text>
+              <!-- Exit point at Y=150 -->
+              <circle cx="815" cy="150" r="5.5" fill="var(--retail)"/>
+              <line class="ref-line" x1="815" y1="156" x2="815" y2="180" stroke="var(--retail)"/>
+              <text class="ann-title" x="815" y="196" text-anchor="middle" fill="var(--retail)">You sell at break-even</text>
+              <text class="ann-sub" x="815" y="210" text-anchor="middle">You exit flat after 2 years</text>
 
-              <!-- Moonshot label at the peak -->
-              <circle cx="685" cy="15" r="5" fill="var(--moonshot)"/>
-              <text class="ann-title" x="680" y="22" text-anchor="end" fill="var(--moonshot)">🚀 Then it pumps without you</text>
-              <text class="ann-sub" x="680" y="37" text-anchor="end">New All-Time High price discovery</text>
+              <!-- Moonshot label at peak -->
+              <circle cx="898" cy="12" r="4.5" fill="var(--moonshot)"/>
+              <text class="ann-title" x="888" y="20" text-anchor="end" fill="var(--moonshot)">Then it pumps without you</text>
+              <text class="ann-sub" x="888" y="34" text-anchor="end">New All-Time High price discovery</text>
             </g>
           </g>
 
-          <!-- Dynamic Tracer Orb (Active Head) -->
+          <!-- Dynamic Tracer Orb -->
           <g id="tracerGroup" opacity="0">
-            <circle id="tracerGlow" cx="0" cy="0" r="12" fill="var(--smart-money)" opacity="0.3"/>
-            <circle id="tracerCore" cx="0" cy="0" r="5" fill="#ffffff" stroke="var(--smart-money)" stroke-width="2"/>
+            <circle cx="0" cy="0" r="9" fill="var(--smart-money)" opacity="0.3"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffffff" stroke="var(--smart-money)" stroke-width="1.8"/>
           </g>
         </svg>
       </div>
@@ -379,16 +339,16 @@
     <section class="control-bar" aria-label="Playback controls">
       <div class="btn-group">
         <button class="btn btn-primary" id="playBtn" onclick="togglePlay()">
-          <span id="playIcon">▶</span> <span id="playText">Play Cycle</span>
+          <span id="playText">Play Cycle</span>
         </button>
-        <button class="btn btn-secondary" onclick="prevStage()" title="Previous Stage (←)">
-          <span>⏮ Prev</span>
+        <button class="btn btn-secondary" onclick="prevStage()" title="Previous Stage (Left Arrow)">
+          <span>Prev</span>
         </button>
-        <button class="btn btn-secondary" onclick="nextStage()" title="Next Stage (→)">
-          <span>Next ⏭</span>
+        <button class="btn btn-secondary" onclick="nextStage()" title="Next Stage (Right Arrow)">
+          <span>Next</span>
         </button>
         <button class="btn btn-secondary" onclick="resetCycle()" title="Reset (R)">
-          <span>↺ Reset</span>
+          <span>Reset</span>
         </button>
       </div>
 
@@ -408,7 +368,7 @@
 
     <!-- Active Stage Narrative Story Card -->
     <article class="narrative-card" id="narrativeCard">
-      <div class="narrative-icon" id="narrativeIcon">🌱</div>
+      <div class="narrative-num" id="narrativeNum">01</div>
       <div class="narrative-content">
         <div class="narrative-tag" id="narrativeTag">Stage 01 • Accumulation Base</div>
         <h2 class="narrative-title" id="narrativeTitle">Smart money accumulates</h2>
@@ -419,12 +379,63 @@
     </article>
 
     <!-- ===================================================================
-         THE MASTERCLASS FINALE: How To Not Be The Exit Liquidity
+         DEDICATED X / TWITTER SHARE CARD STUDIO
+         =================================================================== -->
+    <section class="x-card-studio" id="xCardSection" aria-label="Share on X">
+      <div class="x-studio-header">
+        <div class="x-studio-title">
+          <span>X (Twitter) Card &amp; Viral Post</span>
+        </div>
+        <div class="x-actions-row">
+          <a class="btn btn-secondary" href="og-image.png" download="crypto-cycle-card.png" title="Download official card image">
+            <span>Download Image for X</span>
+          </a>
+          <button class="btn btn-secondary" onclick="copyPostText()">
+            <span>Copy Post Text</span>
+          </button>
+          <button class="btn btn-primary" onclick="shareToTwitter()">
+            <span>Post to X</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="x-preview-container">
+        <!-- Visual Mockup of Card -->
+        <div class="x-image-mockup">
+          <img src="og-image.png" alt="Official Twitter / X Card Graphic for Crypto Cycle">
+        </div>
+
+        <!-- Post Copy Box -->
+        <div class="x-post-preview">
+          <textarea class="x-post-text" id="xPostContent" rows="11" readonly>The 10 stages of every crypto cycle:
+
+1. Smart money accumulates
+2. Breakout, early longs
+3. KOLs start shilling (you buy in)
+4. Retail FOMOs at the top
+5. "Just a healthy retracement"
+6. Dead cat bounce
+7. You hold, down 90%
+8. Smart money buys again
+9. Fundamentals bring it back
+10. You sell at break-even... then it pumps without you.
+
+How to not be the exit liquidity:
+https://327279.github.io/crypto-cycle/</textarea>
+          <div style="font-size: 11px; color: var(--text-muted); display:flex; justify-content:space-between;">
+            <span>Attach the downloaded card image above to your tweet for maximum engagement.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         FINALE: How To Not Be The Exit Liquidity
          =================================================================== -->
     <section class="lessons-section" id="lessons" aria-labelledby="lessonsHeading">
       
-      <div style="text-align: center; margin-bottom: 24px;">
-        <span class="section-badge">🛡️ Survival Playbook</span>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="section-badge">Survival Playbook</span>
         <h2 class="section-heading" id="lessonsHeading">How to not be the exit liquidity</h2>
         <p class="section-sub" style="margin: 0 auto;">
           The crypto market is designed to transfer wealth from the impatient and emotional to the disciplined. Here is how you protect yourself.
@@ -436,7 +447,6 @@
         
         <!-- Rule 1: Do Your Own Research -->
         <div class="bento-card card-dyor">
-          <div class="bento-icon-wrapper" style="color: var(--cyan);">🔍</div>
           <div class="bento-rule-number">Rule 01 • Research</div>
           <h3 class="bento-title">Do your own research</h3>
           <p class="bento-quote">
@@ -444,13 +454,12 @@
           </p>
           <div class="bento-details">
             <b>Actionable Rule:</b>
-            Verify team vesting schedules, token inflation rate, on-chain liquidity locks, and dev repository commits before buying. If an influencer has to scream about it, they are likely looking for your exit liquidity.
+            Verify team vesting schedules, token inflation rate, on-chain liquidity locks, and dev repository commits before buying. If an influencer is promoting it aggressively, they are likely looking for your exit liquidity.
           </div>
         </div>
 
         <!-- Rule 2: Buy Fundamentals -->
         <div class="bento-card card-fundamentals">
-          <div class="bento-icon-wrapper" style="color: var(--smart-money);">💎</div>
           <div class="bento-rule-number">Rule 02 • Selection</div>
           <h3 class="bento-title">Buy fundamentals</h3>
           <p class="bento-quote">
@@ -464,7 +473,6 @@
 
         <!-- Rule 3: Set a Realistic Target -->
         <div class="bento-card card-target">
-          <div class="bento-icon-wrapper" style="color: var(--retail);">🎯</div>
           <div class="bento-rule-number">Rule 03 • Execution</div>
           <h3 class="bento-title">Set a realistic target</h3>
           <p class="bento-quote">
@@ -480,61 +488,13 @@
 
       <!-- Golden Rule Hero Card -->
       <div class="golden-rule-card">
-        <div class="golden-badge">✨ The Trader's Mindset</div>
+        <div class="golden-badge">The Golden Rule</div>
         <div class="golden-quote">
           "Coin still running after you sold? No worries, you still made money. Wait for a good re-entry, or move on to the next one."
         </div>
         <p class="golden-sub">
           Selling too early and taking real profit is a win every single time. The market runs 24/7/365 — there will always be another trade, another setup, and another cycle. Protect your principal capital first, and your profits second.
         </p>
-      </div>
-
-      <!-- Interactive Exit Liquidity Self-Audit -->
-      <div class="quiz-card">
-        <h3 class="quiz-title">
-          <span>⚡ Quick Self-Audit: Are You At Risk of Becoming Exit Liquidity?</span>
-        </h3>
-        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
-          Check all statements that are TRUE for your current crypto strategy:
-        </p>
-        <div class="quiz-questions">
-          <div class="quiz-item" onclick="toggleQuizItem(this)">
-            <div class="quiz-checkbox"></div>
-            <span class="quiz-text">I have a predetermined take-profit price target written down BEFORE I enter a trade.</span>
-          </div>
-          <div class="quiz-item" onclick="toggleQuizItem(this)">
-            <div class="quiz-checkbox"></div>
-            <span class="quiz-text">I never purchase a coin within 24 hours of seeing a thread from a large influencer (KOL).</span>
-          </div>
-          <div class="quiz-item" onclick="toggleQuizItem(this)">
-            <div class="quiz-checkbox"></div>
-            <span class="quiz-text">I have taken out my initial investment in cash/stablecoins after a major pump.</span>
-          </div>
-          <div class="quiz-item" onclick="toggleQuizItem(this)">
-            <div class="quiz-checkbox"></div>
-            <span class="quiz-text">I understand the token unlock / vesting schedule and who holds the seed allocations.</span>
-          </div>
-        </div>
-        <div class="quiz-result-banner" id="quizResult">
-          <span>Select your habits above to see your Trader Rating</span>
-          <span class="hud-tag tag-green">4 Habits Checklist</span>
-        </div>
-      </div>
-
-      <!-- Share & Deploy Banner -->
-      <div class="share-banner">
-        <div class="share-callout">
-          <b>Share this visual cycle with other traders</b>
-          <span>Help friends avoid buying local tops and holding down 90%.</span>
-        </div>
-        <div class="share-actions">
-          <button class="btn btn-primary" onclick="shareToTwitter()">
-            <span>𝕏 Post on Twitter</span>
-          </button>
-          <button class="btn btn-secondary" onclick="copyShareLink()">
-            <span>🔗 Copy Link</span>
-          </button>
-        </div>
       </div>
 
     </section>
@@ -545,7 +505,7 @@
         Educational illustration &amp; market psychology breakdown. <b>Not financial advice.</b>
       </p>
       <p>
-        Created with precision for crypto traders worldwide.
+        The Crypto Market Cycle &bull; Open Source Educational Resource
       </p>
     </footer>
 
@@ -553,7 +513,6 @@
 
   <!-- Toast Notification Container -->
   <div class="toast" id="toast">
-    <span id="toastIcon">✓</span>
     <span id="toastMsg">Notification message</span>
   </div>
 
