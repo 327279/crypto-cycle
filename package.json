@@ -1,0 +1,21 @@
+{
+  "name": "crypto-market-cycle",
+  "version": "1.0.0",
+  "description": "The Crypto Market Cycle: How Retail Becomes Exit Liquidity - Interactive Visual Guide",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "build": "echo 'Static build ready'"
+  },
+  "keywords": [
+    "crypto",
+    "market-cycle",
+    "interactive-chart",
+    "svg-animation",
+    "exit-liquidity",
+    "trading-psychology"
+  ],
+  "author": "zethh",
+  "license": "MIT"
+}
