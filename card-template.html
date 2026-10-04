@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@600;700;800&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #080a11;
+      font-family: 'Inter', sans-serif;
+      color: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 44px;
+      position: relative;
+    }
+
+    /* Subtle ambient glows */
+    .glow-bg {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-green {
+      width: 320px;
+      height: 320px;
+      background: rgba(16, 185, 129, 0.12);
+      bottom: 20px;
+      left: 100px;
+    }
+    .glow-gold {
+      width: 340px;
+      height: 340px;
+      background: rgba(251, 191, 36, 0.14);
+      top: 40px;
+      right: 40px;
+    }
+    .glow-red {
+      width: 280px;
+      height: 280px;
+      background: rgba(239, 68, 68, 0.10);
+      top: 100px;
+      left: 500px;
+    }
+
+    /* Grid overlay */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 70px 70px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Outer border */
+    .outer-frame {
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Content layer */
+    .content {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 12px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #10b981;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(180deg, #ffffff 30%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      color: #10b981;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Chart Canvas */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      margin: 4px 0;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Callout Card Styles */
+    .callout-box {
+      background: rgba(13, 17, 28, 0.92);
+      border-radius: 8px;
+      padding: 7px 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      white-space: nowrap;
+    }
+
+    .tag-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .tag-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .phases {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phase-step {
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .phase-arrow {
+      color: #475569;
+    }
+
+    .footer-right {
+      color: #f59e0b;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-bg glow-green"></div>
+  <div class="glow-bg glow-gold"></div>
+  <div class="glow-bg glow-red"></div>
+  <div class="grid-bg"></div>
+  <div class="outer-frame"></div>
+
+  <div class="content">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Market Psychology</span>
+        </div>
+        <div class="title">THE CRYPTO MARKET CYCLE</div>
+        <div class="subtitle">How 95% of retail becomes exit liquidity — and how to avoid it.</div>
+      </div>
+      <div class="header-right">
+        <span>crypto-cycles.vercel.app</span>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+      <svg viewBox="0 0 1100 370">
+        <defs>
+          <linearGradient id="gradCurve" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="35%" stop-color="#a855f7"/>
+            <stop offset="50%" stop-color="#f97316"/>
+            <stop offset="65%" stop-color="#ef4444"/>
+            <stop offset="80%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <!-- Break-Even Reference Line -->
+        <line x1="30" y1="180" x2="1070" y2="180" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.65"/>
+        
+        <!-- Entry Level Pill -->
+        <g transform="translate(30, 166)">
+          <rect width="136" height="26" rx="5" fill="#0d111c" stroke="#f97316" stroke-width="1.2"/>
+          <text x="68" y="17" fill="#f97316" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" text-anchor="middle">ENTRY LEVEL ($100)</text>
+        </g>
+
+        <!-- Main Glowing Market Curve -->
+        <!-- Background Glow Layer -->
+        <path d="M 40,310 C 120,310 180,305 240,290 C 300,270 350,220 400,180 C 450,135 480,75 520,65 C 550,65 580,140 620,195 C 650,230 670,210 700,205 C 730,205 770,300 810,320 C 850,320 890,320 920,320 C 950,320 980,240 1010,180 C 1035,120 1060,60 1080,30" 
+              fill="none" stroke="url(#gradCurve)" stroke-width="12" opacity="0.4" filter="url(#glow)"/>
+
+        <!-- Core Crisp Curve Line -->
+        <path d="M 40,310 C 120,310 180,305 240,290 C 300,270 350,220 400,180 C 450,135 480,75 520,65 C 550,65 580,140 620,195 C 650,230 670,210 700,205 C 730,205 770,300 810,320 C 850,320 890,320 920,320 C 950,320 980,240 1010,180 C 1035,120 1060,60 1080,30" 
+              fill="none" stroke="url(#gradCurve)" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- STAGE 1: Smart Money Accumulates -->
+        <g transform="translate(130, 310)">
+          <circle r="6" fill="#10b981" stroke="#080a11" stroke-width="2"/>
+          <circle r="12" fill="none" stroke="#10b981" stroke-width="1" opacity="0.6"/>
+          <foreignObject x="-10" y="16" width="200" height="60">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(16, 185, 129, 0.6);">
+              <div class="tag-title" style="color: #10b981;">1. Smart Money Accumulates</div>
+              <div class="tag-sub">Quiet baseline buying</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 2: You Buy In ($100) -->
+        <g transform="translate(400, 180)">
+          <circle r="6.5" fill="#f97316" stroke="#080a11" stroke-width="2"/>
+          <circle r="14" fill="none" stroke="#f97316" stroke-width="1.2" opacity="0.7"/>
+          <foreignObject x="-175" y="-62" width="165" height="60">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(249, 115, 22, 0.6);">
+              <div class="tag-title" style="color: #f97316;">2. You Buy In ($100)</div>
+              <div class="tag-sub">KOLs shill &amp; hype starts</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 3: Retail FOMO Top -->
+        <g transform="translate(520, 65)">
+          <circle r="7" fill="#ef4444" stroke="#080a11" stroke-width="2"/>
+          <foreignObject x="-75" y="-58" width="150" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(239, 68, 68, 0.7); text-align: center;">
+              <div class="tag-title" style="color: #ef4444;">3. Retail FOMO Top</div>
+              <div class="tag-sub">Whales exit into liquidity</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 4: Dead Cat Bounce -->
+        <g transform="translate(700, 205)">
+          <circle r="5.5" fill="#ef4444" stroke="#080a11" stroke-width="2"/>
+          <foreignObject x="14" y="-22" width="160" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(239, 68, 68, 0.5);">
+              <div class="tag-title" style="color: #f87171;">4. Dead Cat Bounce</div>
+              <div class="tag-sub">Last exit chance (you hold)</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 5: Down -90% Capitulation -->
+        <g transform="translate(810, 320)">
+          <circle r="6" fill="#ef4444" stroke="#080a11" stroke-width="2"/>
+          <foreignObject x="-85" y="16" width="165" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(239, 68, 68, 0.6); text-align: center;">
+              <div class="tag-title" style="color: #ef4444;">5. Down -90% Bleed</div>
+              <div class="tag-sub">Capitulation &amp; silence</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 6: Smart Money Re-Buys -->
+        <g transform="translate(920, 320)">
+          <circle r="6" fill="#10b981" stroke="#080a11" stroke-width="2"/>
+          <foreignObject x="14" y="16" width="155" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(16, 185, 129, 0.6);">
+              <div class="tag-title" style="color: #10b981;">6. Smart Money Buys</div>
+              <div class="tag-sub">Accumulating the bottom</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 7: You Sell at Break-Even -->
+        <g transform="translate(1010, 180)">
+          <circle r="6.5" fill="#f97316" stroke="#080a11" stroke-width="2"/>
+          <foreignObject x="-175" y="15" width="170" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(249, 115, 22, 0.7); text-align: right;">
+              <div class="tag-title" style="color: #f97316;">7. You Sell at Break-Even</div>
+              <div class="tag-sub">You exit flat after 2 years</div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <!-- STAGE 8: Moonshot Without You -->
+        <g transform="translate(1080, 30)">
+          <circle r="7.5" fill="#fbbf24" stroke="#080a11" stroke-width="2"/>
+          <circle r="16" fill="none" stroke="#fbbf24" stroke-width="1.2" opacity="0.8"/>
+          <foreignObject x="-185" y="-12" width="175" height="55">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="callout-box" style="border: 1px solid rgba(251, 191, 36, 0.8); text-align: right;">
+              <div class="tag-title" style="color: #fbbf24;">8. Pumps to New ATH!</div>
+              <div class="tag-sub">Moonshot without you</div>
+            </div>
+          </foreignObject>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="phases">
+        <span class="phase-step">1. ACCUMULATION</span>
+        <span class="phase-arrow">→</span>
+        <span class="phase-step">2. MARKUP</span>
+        <span class="phase-arrow">→</span>
+        <span class="phase-step">3. DISTRIBUTION</span>
+        <span class="phase-arrow">→</span>
+        <span class="phase-step">4. CAPITULATION</span>
+        <span class="phase-arrow">→</span>
+        <span class="phase-step" style="color: #fbbf24;">5. REBIRTH</span>
+      </div>
+      <div class="footer-right">
+        <span>SURVIVAL PLAYBOOK INSIDE</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
