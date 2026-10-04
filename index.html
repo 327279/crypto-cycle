@@ -181,18 +181,18 @@
           <text class="axis-label" x="55" y="290" text-anchor="end">$30</text>
           <text class="axis-label" x="55" y="370" text-anchor="end">$10</text>
 
-          <text class="axis-label" x="895" y="438" text-anchor="end">TIME / PSYCHOLOGY</text>
+          <!-- Clean Time Progression Labels without overlap -->
           <text class="axis-label" x="110" y="438" text-anchor="middle">Accumulation</text>
           <text class="axis-label" x="340" y="438" text-anchor="middle">Markup</text>
           <text class="axis-label" x="515" y="438" text-anchor="middle">Distribution</text>
           <text class="axis-label" x="660" y="438" text-anchor="middle">Capitulation</text>
           <text class="axis-label" x="815" y="438" text-anchor="middle">Rebirth</text>
 
-          <!-- Break-Even Constant Reference Line at Y=150 -->
+          <!-- Break-Even Constant Reference Line at Y=150 (Positioned on clean left side) -->
           <g id="breakEvenLineGroup" opacity="0" style="transition: opacity 0.5s ease;">
             <line x1="65" y1="150" x2="895" y2="150" stroke="var(--retail)" stroke-width="1.2" stroke-dasharray="4 4" class="ref-line"/>
-            <rect x="740" y="136" width="155" height="18" rx="3" fill="var(--chart-bg)" stroke="var(--retail)" stroke-width="1" opacity="0.9"/>
-            <text class="axis-label" x="817" y="149" text-anchor="middle" fill="var(--retail)" font-weight="600" font-size="10">YOUR ENTRY ($100)</text>
+            <rect x="72" y="136" width="135" height="18" rx="3" fill="var(--chart-bg)" stroke="var(--retail)" stroke-width="1" opacity="0.95"/>
+            <text class="axis-label" x="139" y="149" text-anchor="middle" fill="var(--retail)" font-weight="600" font-size="10">ENTRY LEVEL ($100)</text>
           </g>
 
           <!-- =================== 10 CURVE STAGES =================== -->
@@ -387,14 +387,14 @@
           <span>X (Twitter) Card &amp; Viral Post</span>
         </div>
         <div class="x-actions-row">
-          <a class="btn btn-secondary" href="og-image.png" download="crypto-cycle-card.png" title="Download official card image">
-            <span>Download Image for X</span>
+          <a class="btn btn-secondary" id="downloadImgBtn" href="og-image.png" download="crypto-cycle-card.png" title="Download official card photo">
+            <span>Download Photo</span>
           </a>
           <button class="btn btn-secondary" onclick="copyPostText()">
-            <span>Copy Post Text</span>
+            <span>Copy Text</span>
           </button>
-          <button class="btn btn-primary" onclick="shareToTwitter()">
-            <span>Post to X</span>
+          <button class="btn btn-primary" onclick="shareToTwitterWithPhoto()">
+            <span>Download Photo &amp; Post on X</span>
           </button>
         </div>
       </div>
@@ -407,23 +407,19 @@
 
         <!-- Post Copy Box -->
         <div class="x-post-preview">
-          <textarea class="x-post-text" id="xPostContent" rows="11" readonly>The 10 stages of every crypto cycle:
+          <textarea class="x-post-text" id="xPostContent" rows="10" readonly>The crypto cycle in 5 steps:
 
 1. Smart money accumulates
-2. Breakout, early longs
-3. KOLs start shilling (you buy in)
-4. Retail FOMOs at the top
-5. "Just a healthy retracement"
-6. Dead cat bounce
-7. You hold, down 90%
-8. Smart money buys again
-9. Fundamentals bring it back
-10. You sell at break-even... then it pumps without you.
+2. KOLs hype the top (you buy in)
+3. You hold down -90%
+4. You sell at break-even
+5. Coin pumps to new ATH without you
 
 How to not be the exit liquidity:
 https://327279.github.io/crypto-cycle/</textarea>
-          <div style="font-size: 11px; color: var(--text-muted); display:flex; justify-content:space-between;">
-            <span>Attach the downloaded card image above to your tweet for maximum engagement.</span>
+          <div style="font-size: 11px; color: var(--text-muted); display:flex; justify-content:space-between; align-items:center;">
+            <span>Optimized under 280 characters for non-premium X users.</span>
+            <span class="hud-tag tag-green">221 / 280 Chars</span>
           </div>
         </div>
       </div>

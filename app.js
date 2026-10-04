@@ -694,29 +694,53 @@
   }
 
   // --- X / TWITTER SHARING HELPERS ---
-  function shareToTwitter() {
-    const textarea = document.getElementById('xPostContent');
-    const textToShare = textarea ? textarea.value : 
-      "The 10 stages of every crypto cycle:\n\n1. Smart money accumulates\n3. KOLs start shilling (you buy in)\n7. You hold, down 90%\n10. You sell at break-even... then it pumps without you.\n\nHow to not be the exit liquidity:\nhttps://327279.github.io/crypto-cycle/";
-    
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`;
-    window.open(url, '_blank');
+  function downloadCardImage() {
+    const a = document.createElement('a');
+    a.href = 'og-image.png';
+    a.download = 'crypto-cycle-card.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
-  function copyPostText() {
+  function shareToTwitterWithPhoto() {
+    // 1. Trigger photo download automatically
+    downloadCardImage();
+
+    // 2. Copy short post text to clipboard
+    copyPostText(false);
+
+    // 3. Open X compose intent with post text and URL
+    const textarea = document.getElementById('xPostContent');
+    const textToShare = textarea ? textarea.value : 
+      "The crypto cycle in 5 steps:\n\n1. Smart money accumulates\n2. KOLs hype the top (you buy in)\n3. You hold down -90%\n4. You sell at break-even\n5. Coin pumps to new ATH without you\n\nHow to not be the exit liquidity:\nhttps://327279.github.io/crypto-cycle/";
+
+    showToast('Photo downloaded! Attach it to your post on X.');
+
+    setTimeout(() => {
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`;
+      window.open(url, '_blank');
+    }, 400);
+  }
+
+  function shareToTwitter() {
+    shareToTwitterWithPhoto();
+  }
+
+  function copyPostText(showFeedback = true) {
     const textarea = document.getElementById('xPostContent');
     if (textarea) {
       textarea.select();
       if (navigator.clipboard) {
         navigator.clipboard.writeText(textarea.value).then(() => {
-          showToast('Post text copied to clipboard');
+          if (showFeedback) showToast('Post text copied to clipboard');
         }).catch(() => {
           document.execCommand('copy');
-          showToast('Post text copied to clipboard');
+          if (showFeedback) showToast('Post text copied to clipboard');
         });
       } else {
         document.execCommand('copy');
-        showToast('Post text copied to clipboard');
+        if (showFeedback) showToast('Post text copied to clipboard');
       }
     }
   }
@@ -752,7 +776,9 @@
   window.toggleSound = toggleSound;
   window.toggleTheme = toggleTheme;
   window.shareToTwitter = shareToTwitter;
+  window.shareToTwitterWithPhoto = shareToTwitterWithPhoto;
   window.copyPostText = copyPostText;
+  window.downloadCardImage = downloadCardImage;
 
   // --- BOOTSTRAP ---
   document.addEventListener('DOMContentLoaded', () => {

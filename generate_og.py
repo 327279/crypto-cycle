@@ -1,140 +1,156 @@
 """
-Generate official 1200x630 Twitter/X OpenGraph Card Image
-Clean, professional fintech dark theme, zero emojis.
+Generate official 1200x630 Twitter/X Post Card Image
+Includes the visual curve chart AND the clear cycle stages printed directly on the card photo,
+designed to attract maximum engagement on X feeds. Clean fintech dark theme, zero emojis.
 """
 from PIL import Image, ImageDraw, ImageFont
-import math
 
 width, height = 1200, 630
 img = Image.new("RGBA", (width, height), (9, 10, 15, 255))
 draw = ImageDraw.Draw(img)
 
-# Background subtle grid
-grid_color = (255, 255, 255, 12)
-for x in range(80, width - 80, 80):
-    draw.line([(x, 60), (x, height - 60)], fill=grid_color, width=1)
-for y in range(80, height - 60, 60):
-    draw.line([(80, y), (width - 80, y)], fill=grid_color, width=1)
-
-# Subtle background radial glow behind the peak and the moonshot
-for r in range(160, 0, -8):
-    alpha = int(18 * (1 - r / 160))
-    draw.ellipse([460 - r, 160 - r, 460 + r, 160 + r], fill=(16, 185, 129, alpha))
-    draw.ellipse([1080 - r, 110 - r, 1080 + r, 110 + r], fill=(251, 191, 36, alpha))
-
 # Try loading standard Windows fonts
 try:
-    font_title = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 34)
-    font_sub = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 18)
-    font_label = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 15)
-    font_sublabel = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 12)
-    font_mono = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 13)
+    font_brand = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 26)
+    font_badge = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 12)
+    font_stage_title = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 15)
+    font_stage_desc = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 12)
+    font_label = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 13)
+    font_mono = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 11)
+    font_hero = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 18)
 except:
-    font_title = ImageFont.load_default()
-    font_sub = ImageFont.load_default()
+    font_brand = ImageFont.load_default()
+    font_badge = ImageFont.load_default()
+    font_stage_title = ImageFont.load_default()
+    font_stage_desc = ImageFont.load_default()
     font_label = ImageFont.load_default()
-    font_sublabel = ImageFont.load_default()
     font_mono = ImageFont.load_default()
+    font_hero = ImageFont.load_default()
 
-# Header
-draw.text((80, 36), "THE CRYPTO MARKET CYCLE", font=font_title, fill=(243, 244, 246, 255))
-draw.text((80, 78), "How Retail Becomes Exit Liquidity  |  An Interactive Psychological Breakdown", font=font_sub, fill=(148, 163, 184, 255))
+# Background grid lines (right chart section)
+grid_color = (255, 255, 255, 10)
+for x in range(460, width - 40, 60):
+    draw.line([(x, 60), (x, height - 70)], fill=grid_color, width=1)
+for y in range(80, height - 70, 50):
+    draw.line([(440, y), (width - 40, y)], fill=grid_color, width=1)
 
-# Break-even line at Y=260
-break_even_y = 260
-for x in range(100, 1100, 12):
-    draw.line([(x, break_even_y), (x + 6, break_even_y)], fill=(249, 115, 22, 130), width=2)
+# Subtle background glow behind peak and moonshot
+for r in range(140, 0, -8):
+    alpha = int(14 * (1 - r / 140))
+    draw.ellipse([720 - r, 150 - r, 720 + r, 150 + r], fill=(16, 185, 129, alpha))
+    draw.ellipse([1120 - r, 100 - r, 1120 + r, 100 + r], fill=(251, 191, 36, alpha))
 
-draw.rectangle([(860, break_even_y - 12), (1070, break_even_y + 12)], fill=(18, 21, 31, 240), outline=(249, 115, 22, 180), width=1)
-draw.text((875, break_even_y - 8), "YOUR ENTRY LEVEL ($100)", font=font_mono, fill=(249, 115, 22, 255))
+# --- LEFT PANEL: The Written Post Lines on the Card ---
+draw.rectangle([(30, 24), (430, height - 24)], fill=(14, 17, 26, 245), outline=(255, 255, 255, 25), width=1)
 
-# Curve Points Calculation (smooth cubic bezier interpolation)
-# Stages:
-# 1: Accumulate (100, 480) -> (200, 475)
-# 2: Breakout (200, 475) -> (310, 400)
-# 3: KOLs & Entry (310, 400) -> (420, 260)
-# 4: FOMO Peak (420, 260) -> (510, 150)
-# 5: Healthy Retrace (510, 150) -> (600, 320)
-# 6: Dead Cat Bounce (600, 320) -> (670, 280)
-# 7: Bleed -90% (670, 280) -> (780, 490)
-# 8: Smart Money Accumulates (780, 490) -> (870, 490)
-# 9: Fundamentals Bring It Back (870, 490) -> (970, 260)
-# 10: Sell at Breakeven & Moonshot (970, 260) -> (1100, 95)
+# Top badge
+draw.rectangle([(48, 40), (195, 62)], fill=(16, 185, 129, 25), outline=(16, 185, 129, 120), width=1)
+draw.text((58, 44), "THE CRYPTO CYCLE", font=font_badge, fill=(16, 185, 129, 255))
 
+draw.text((48, 72), "How Retail Becomes", font=font_brand, fill=(243, 244, 246, 255))
+draw.text((48, 104), "Exit Liquidity", font=font_brand, fill=(249, 115, 22, 255))
+
+# The written stages along the card photo
+stages_text = [
+    ("1. Accumulation", "Smart money buys low in silence", (16, 185, 129)),
+    ("2. Breakout", "Early technical traders step in", (16, 185, 129)),
+    ("3. KOL Hype", "Influencers shill, you buy at $100", (168, 85, 247)),
+    ("4. Retail FOMO", "Newbies buy top, whales exit", (249, 115, 22)),
+    ("5. Retracement", "'Just a healthy dip' - you hold", (239, 68, 68)),
+    ("6. Dead Cat Bounce", "Relief rally fails, you stay trapped", (148, 163, 184)),
+    ("7. Max Pain Bleed", "You hold down -90% in despair", (239, 68, 68)),
+    ("8. Re-Accumulation", "Smart money buys the bottom floor", (16, 185, 129)),
+    ("9. Fundamental Recovery", "Real protocol growth recovers to $100", (16, 185, 129)),
+    ("10. Break-Even Exit", "You sell flat... then it pumps to ATH!", (251, 191, 36)),
+]
+
+y_pos = 146
+for title, desc, col in stages_text:
+    draw.ellipse([(48, y_pos + 4), (54, y_pos + 10)], fill=col)
+    draw.text((62, y_pos), title, font=font_stage_title, fill=col)
+    draw.text((62, y_pos + 17), desc, font=font_stage_desc, fill=(148, 163, 184, 255))
+    y_pos += 38
+
+# Left panel footer link
+draw.line([(48, height - 64), (410, height - 64)], fill=(255, 255, 255, 20), width=1)
+draw.text((48, height - 52), "LIVE INTERACTIVE ENGINE: 327279.github.io/crypto-cycle", font=font_mono, fill=(148, 163, 184, 255))
+
+
+# --- RIGHT PANEL: Visual Market Curve ---
+# Break-even line at Y=250
+break_even_y = 250
+for x in range(450, 1160, 12):
+    draw.line([(x, break_even_y), (x + 6, break_even_y)], fill=(249, 115, 22, 120), width=2)
+
+draw.rectangle([(450, break_even_y - 10), (590, break_even_y + 10)], fill=(9, 10, 15, 240), outline=(249, 115, 22, 160), width=1)
+draw.text((460, break_even_y - 7), "ENTRY LEVEL ($100)", font=font_mono, fill=(249, 115, 22, 255))
+
+# Curve Bezier Segments
 def bezier_point(p0, p1, p2, p3, t):
     x = (1-t)**3 * p0[0] + 3*(1-t)**2 * t * p1[0] + 3*(1-t) * t**2 * p2[0] + t**3 * p3[0]
     y = (1-t)**3 * p0[1] + 3*(1-t)**2 * t * p1[1] + 3*(1-t) * t**2 * p2[1] + t**3 * p3[1]
     return (x, y)
 
-segments = [
-    # (p0, p1, p2, p3, color)
-    ((100, 485), (140, 485), (170, 480), (210, 475), (16, 185, 129)),       # 1
-    ((210, 475), (250, 470), (280, 435), (320, 390), (16, 185, 129)),       # 2
-    ((320, 390), (355, 345), (390, 280), (420, 260), (16, 185, 129)),       # 3
-    ((420, 260), (450, 210), (475, 150), (510, 150), (16, 185, 129)),       # 4
-    ((510, 150), (540, 150), (570, 250), (600, 330), (239, 68, 68)),        # 5
-    ((600, 330), (625, 320), (645, 275), (670, 275), (239, 68, 68)),        # 6
-    ((670, 275), (695, 285), (730, 450), (780, 490), (239, 68, 68)),        # 7
-    ((780, 490), (810, 490), (840, 490), (870, 490), (16, 185, 129)),       # 8
-    ((870, 490), (910, 490), (940, 370), (970, 260), (16, 185, 129)),       # 9
-    ((970, 260), (1010, 180), (1050, 110), (1100, 95), (251, 191, 36)),     # 10
+curve_segments = [
+    # Accumulation
+    ((460, 480), (490, 480), (520, 475), (550, 465), (16, 185, 129)),
+    # Breakout
+    ((550, 465), (580, 455), (610, 410), (640, 350), (16, 185, 129)),
+    # Markup to entry
+    ((640, 350), (665, 300), (690, 260), (715, 250), (16, 185, 129)),
+    # Peak FOMO
+    ((715, 250), (740, 200), (765, 120), (790, 115), (16, 185, 129)),
+    # Drop
+    ((790, 115), (810, 115), (835, 230), (860, 290), (239, 68, 68)),
+    # Dead cat
+    ((860, 290), (880, 280), (895, 245), (915, 245), (239, 68, 68)),
+    # Bleed -90%
+    ((915, 245), (935, 250), (965, 440), (1000, 485), (239, 68, 68)),
+    # Floor
+    ((1000, 485), (1020, 485), (1040, 485), (1060, 485), (16, 185, 129)),
+    # Phoenix Rebirth
+    ((1060, 485), (1085, 485), (1105, 360), (1125, 250), (16, 185, 129)),
+    # Moonshot past breakeven
+    ((1125, 250), (1145, 170), (1165, 90), (1180, 65), (251, 191, 36)),
 ]
 
-for p0, p1, p2, p3, base_color in segments:
-    pts = [bezier_point(p0, p1, p2, p3, i / 40.0) for i in range(41)]
-    # Glow layer
-    glow_color = (base_color[0], base_color[1], base_color[2], 50)
+for p0, p1, p2, p3, base_col in curve_segments:
+    pts = [bezier_point(p0, p1, p2, p3, i / 30.0) for i in range(31)]
+    # Glow
     for i in range(len(pts) - 1):
-        draw.line([pts[i], pts[i+1]], fill=glow_color, width=10)
-    # Core line
-    core_color = (base_color[0], base_color[1], base_color[2], 255)
+        draw.line([pts[i], pts[i+1]], fill=(base_col[0], base_col[1], base_col[2], 50), width=9)
+    # Core
     for i in range(len(pts) - 1):
-        draw.line([pts[i], pts[i+1]], fill=core_color, width=4)
+        draw.line([pts[i], pts[i+1]], fill=(base_col[0], base_col[1], base_col[2], 255), width=3)
 
-# Milestone Points & Labels
-milestones = [
-    (140, 485, "1. Smart money accumulates", "Quiet accumulation", (16, 185, 129), (140, 520), "center"),
-    (320, 390, "2. Breakout", "Early technical longs", (16, 185, 129), (240, 375), "right"),
-    (375, 315, "3. KOLs start shilling", "Influencers hype 100x", (168, 85, 247), (275, 305), "right"),
-    (420, 260, "YOU BUY IN", "Entry Price: $100.00", (249, 115, 22), (370, 235), "right"),
-    (510, 150, "4. Retail FOMO at top", "Smart money exits", (249, 115, 22), (510, 115), "center"),
-    (600, 330, "5. 'Healthy retracement'", "Dip buyers trapped", (239, 68, 68), (620, 335), "left"),
-    (670, 275, "6. Dead cat bounce", "Relief rally fails", (148, 163, 184), (685, 265), "left"),
-    (780, 490, "7. You hold, down 90%", "Max pain bleed", (239, 68, 68), (730, 440), "right"),
-    (850, 490, "8. Smart money buys again", "Quiet floor accumulation", (16, 185, 129), (850, 520), "center"),
-    (930, 370, "9. Fundamentals recover", "Organic protocol growth", (16, 185, 129), (940, 390), "left"),
-    (970, 260, "10. You sell at break-even", "Exit flat with zero profit", (249, 115, 22), (970, 290), "center"),
-    (1100, 95, "Pumps without you", "New All-Time High", (251, 191, 36), (1090, 60), "right")
+# Key Visual Callouts on Curve
+chart_callouts = [
+    (500, 478, "Smart money accumulates", (16, 185, 129), (500, 505), "center"),
+    (715, 250, "You buy in ($100)", (249, 115, 22), (640, 225), "right"),
+    (790, 115, "Retail FOMO at top", (249, 115, 22), (790, 85), "center"),
+    (860, 290, "Healthy retrace?", (239, 68, 68), (875, 295), "left"),
+    (1000, 485, "Down 90% capitulation", (239, 68, 68), (960, 515), "right"),
+    (1060, 485, "Smart money re-buys", (16, 185, 129), (1075, 515), "left"),
+    (1125, 250, "You sell at break-even", (249, 115, 22), (1110, 280), "right"),
+    (1180, 65, "Pumps to ATH!", (251, 191, 36), (1170, 40), "right"),
 ]
 
-for mx, my, title, sub, col, (tx, ty), align in milestones:
-    # Outer ring
-    draw.ellipse([mx - 7, my - 7, mx + 7, my + 7], fill=(9, 10, 15, 255), outline=col, width=2)
-    draw.ellipse([mx - 4, my - 4, mx + 4, my + 4], fill=col)
+for cx, cy, label, col, (lx, ly), align in chart_callouts:
+    draw.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], fill=(9, 10, 15, 255), outline=col, width=2)
+    draw.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=col)
 
-    # Calculate text positioning
-    bbox_t = font_label.getbbox(title)
-    w_t = bbox_t[2] - bbox_t[0]
-    bbox_s = font_sublabel.getbbox(sub)
-    w_s = bbox_s[2] - bbox_s[0]
-
+    bbox = font_label.getbbox(label)
+    w = bbox[2] - bbox[0]
     if align == "center":
-        pos_tx = tx - w_t // 2
-        pos_sx = tx - w_s // 2
+        pos_x = lx - w // 2
     elif align == "right":
-        pos_tx = tx - w_t
-        pos_sx = tx - w_s
+        pos_x = lx - w
     else:
-        pos_tx = tx
-        pos_sx = tx
+        pos_x = lx
+    draw.text((pos_x, ly), label, font=font_label, fill=(243, 244, 246, 255))
 
-    draw.text((pos_tx, ty), title, font=font_label, fill=(243, 244, 246, 255))
-    draw.text((pos_sx, ty + 18), sub, font=font_sublabel, fill=(148, 163, 184, 255))
-
-# Footer bar
-draw.line([(80, 575), (width - 80, 575)], fill=(255, 255, 255, 25), width=1)
-draw.text((80, 588), "LIVE INTERACTIVE ENGINE: 327279.github.io/crypto-cycle", font=font_mono, fill=(148, 163, 184, 255))
-draw.text((width - 80, 588), "DO YOUR OWN RESEARCH  |  NOT FINANCIAL ADVICE", font=font_mono, fill=(100, 116, 139, 255), anchor="ra")
+# Right top title
+draw.text((450, 36), "MARKET PSYCHOLOGY CURVE", font=font_hero, fill=(243, 244, 246, 255))
 
 img.save("og-image.png", "PNG")
-print("Saved og-image.png successfully")
+print("Saved enhanced og-image.png successfully")
