@@ -696,7 +696,7 @@
   // --- X / TWITTER SHARING HELPERS ---
   function downloadCardImage() {
     const a = document.createElement('a');
-    a.href = 'og-image.png';
+    a.href = 'card-v2.png';
     a.download = 'crypto-cycle-card.png';
     document.body.appendChild(a);
     a.click();
