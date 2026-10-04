@@ -713,7 +713,7 @@
     // 3. Open X compose intent with post text and URL
     const textarea = document.getElementById('xPostContent');
     const textToShare = textarea ? textarea.value : 
-      "The crypto cycle in 5 steps:\n\n1. Smart money accumulates\n2. KOLs hype the top (you buy in)\n3. You hold down -90%\n4. You sell at break-even\n5. Coin pumps to new ATH without you\n\nHow to not be the exit liquidity:\nhttps://327279.github.io/crypto-cycle/";
+      "The crypto cycle in 5 steps:\n\n1. Smart money accumulates\n2. KOLs hype the top (you buy in)\n3. You hold down -90%\n4. You sell at break-even\n5. Coin pumps to new ATH without you\n\nHow to not be the exit liquidity:\nhttps://crypto-cycles.vercel.app";
 
     showToast('Photo downloaded! Attach it to your post on X.');
 
